@@ -7,10 +7,10 @@
 #define DIO 3
 
 TM1637Display display(CLK, DIO);
-LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 DS3231  rtc(SDA, SCL); // inisialisasi penggunaan i2c
 
-Time  t;
+Time t;
 unsigned int h,m,s;
 byte f;
 
@@ -21,6 +21,8 @@ int Hor;
 int Min;
 
 int Sec;
+const int ldr = A2;
+int nilai;
 
 void setup()
 {
@@ -44,6 +46,18 @@ void setup()
 //rtc.setDOW(7);            //setting hari Jumat, 7=Minggu,1=Senin
  
 //setelah didownload awal selesai, download kedua dengan memberi tanda komen "//"
+//  pinMode(11, OUTPUT);
+//  pinMode(10, OUTPUT);
+//  pinMode(9, OUTPUT);
+//  pinMode(8, OUTPUT);
+//  pinMode(7, OUTPUT);
+//  pinMode(6, OUTPUT);
+//  pinMode(5, OUTPUT);
+//  pinMode(4, OUTPUT);
+  DDRD = B11111111;
+  DDRB = B11111111;
+  Serial.begin(115200);
+
 }
  
 void loop()
@@ -95,6 +109,341 @@ void loop()
     display.showNumberDecEx(h, 0); 
     f=0;
   }
-  
   delay (1000); //waktu tunda 1 detik per cycle
+
+  nilai = analogRead(ldr);
+  Serial.print("Nilai LDR: ");
+  Serial.println(nilai);
+  if (nilai < 25) {
+  //led hidup kemudian mati 750
+//    digitalWrite(11, HIGH);
+//    digitalWrite(10, HIGH);
+//    digitalWrite(9, HIGH);
+//    digitalWrite(8, HIGH);
+//    digitalWrite(7, HIGH);
+//    digitalWrite(6, HIGH);
+//    digitalWrite(5, HIGH);
+//    digitalWrite(4, HIGH);
+    PORTD = B11111000;
+    PORTB = B00001111;
+    delay(80);
+
+    //Pembatas megalir dari tengah ke pinggir speed 100 kelima
+//    digitalWrite(11, LOW);
+//    digitalWrite(10, LOW);
+//    digitalWrite(9, LOW);
+//    digitalWrite(8, HIGH);
+//    digitalWrite(7, HIGH);
+//    digitalWrite(6, LOW);
+//    digitalWrite(5, LOW);
+//    digitalWrite(4, LOW);
+    PORTD = B10000000;
+    PORTB = B00000001;
+    delay(60);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(60);
+    digitalWrite(11, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, LOW);
+    delay(60);
+    digitalWrite(11, HIGH);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, HIGH);
+    delay(60);
+    
+    //mengalir dari pinggir ke tengah speed 100 kelima
+    digitalWrite(11, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, LOW);
+    delay(60);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(60);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(60);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(60);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(60);
+     //Pembatas led mengalir 100 ketiga
+    digitalWrite(11, HIGH);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, HIGH);
+    delay(20); 
+    
+    //mengalir sebaliknya 100 ketiga
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, HIGH);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, HIGH);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    
+    digitalWrite(11, HIGH);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, HIGH);
+    delay(20);
+    
+    //mengalir dari pinggir ke tengah speed 100 kelima
+    digitalWrite(11, LOW);
+    digitalWrite(10, HIGH);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, HIGH);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, HIGH);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+    delay(20);
+    
+
+   }
+   else 
+   {
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(4, LOW);
+   }
+
+  
+//  delay (1000); //waktu tunda 1 detik per cycle
+
+  
 }
